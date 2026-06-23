@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "title": "🚀 Welcome to AniVerse Community!",
+        "content": "Welcome everyone! This is your space for anime discussions, financial education, and growth. Make sure to check the payment section if you're interested in premium content.\n\nRemember to follow the community guidelines and respect each other.",
+        "date": "2025-12-08",
+        "author": "admin",
+        "pinned": true
+    },
+    {
+        "id": 2,
+        "title": "📢 New Crypto Strategy Released",
+        "content": "Just shared a new guide on how to identify early-stage crypto projects with potential. Check it out in the premium section!",
+        "date": "2025-12-09",
+        "author": "admin",
+        "pinned": false
+    },
+    {
+        "id": 3,
+        "title": "🎬 Weekly Anime Watchlist",
+        "content": "This week's recommendations:\n1. Attack on Titan Final Season\n2. Demon Slayer Entertainment District Arc\n3. Spy x Family\n\nShare your thoughts in the community!",
+        "date": "2025-12-07",
+        "author": "moderator",
+        "pinned": false
+    }
+]

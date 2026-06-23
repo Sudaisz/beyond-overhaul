@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "title": "🚀 Exclusive Telegram Channel",
+        "text": "Join our private Telegram channel for daily money-making tips, crypto insights, and exclusive community content!",
+        "link": "https://t.me/beyondtechs",
+        "buttonText": "Join Now →",
+        "active": true,
+        "manual": true,
+        "duration": 10
+    },
+    {
+        "id": 2,
+        "title": "💎 Premium Membership",
+        "text": "Upgrade to premium for one-on-one mentoring, early access to strategies, and exclusive resources.",
+        "link": "payment.html",
+        "buttonText": "Learn More",
+        "active": true,
+        "manual": false,
+        "duration": 8
+    }
+]
