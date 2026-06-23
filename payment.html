@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Options | AniVerse</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="logo">
+            <i class="fas fa-robot"></i>
+            <span>AniVerse</span>
+        </div>
+        
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="community.html"><i class="fas fa-users"></i> Community</a></li>
+                <li><a href="quotes.html"><i class="fas fa-quote-right"></i> Anime Quotes</a></li>
+                <li><a href="payment.html" class="active"><i class="fas fa-wallet"></i> Payment</a></li>
+            </ul>
+        </nav>
+        
+        <div class="user-menu">
+            <button onclick="window.history.back()" class="btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1><i class="fas fa-wallet"></i> Payment Options</h1>
+                <p class="subtitle">Choose your preferred payment method for premium content</p>
+            </div>
+
+            <div class="payment-grid">
+                <!-- Crypto Payments -->
+                <div class="payment-card card">
+                    <div class="payment-header">
+                        <i class="fab fa-bitcoin"></i>
+                        <h3>Crypto Payments</h3>
+                    </div>
+                    <div class="payment-methods">
+                        <div class="method">
+                            <h4><i class="fas fa-coins"></i> TON Wallet</h4>
+                            <div class="wallet-address">
+                                <code id="tonAddress">UQDxlyPsprKxwfx1Dj5YvfvyTZm5P7CSe5aQNAmxAGywV0dy</code>
+                                <button onclick="copyToClipboard('tonAddress')" class="btn-small">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <p class="method-note">Fastest confirmation times</p>
+                        </div>
+                        
+                        <div class="method">
+                            <h4><i class="fab fa-ethereum"></i> USDT tron</h4>
+                            <div class="wallet-address">
+                                <code id="usdtAddress">TBNvsJSLfnJbEXuMTbDzGny63WzKGa7ERg</code>
+                                <button onclick="copyToClipboard('usdtAddress')" class="btn-small">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <p class="method-note">Recommended: Trust Wallet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bank Transfer -->
+                <div class="payment-card card">
+                    <div class="payment-header">
+                        <i class="fas fa-university"></i>
+                        <h3>Bank Transfer (Nigeria)</h3>
+                    </div>
+                    <div class="bank-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Bank Name:</span>
+                            <span class="detail-value">Opay</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Account Name:</span>
+                            <span class="detail-value">Sudais</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Account Number:</span>
+                            <span class="detail-value">9019760022</span>
+                            <button onclick="copyToClipboard('accountNumber')" class="btn-small">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="accountNumber" value="1234567890" style="display: none;">
+                    </div>
+                </div>
+
+                <!-- Premium Plans -->
+                <div class="payment-card card">
+                    <div class="payment-header">
+                        <i class="fas fa-crown"></i>
+                        <h3>Premium Plans</h3>
+                    </div>
+                    <div class="plans">
+                        <div class="plan">
+                            <h4>Basic Access</h4>
+                            <p class="plan-price">$10 <small>/month</small></p>
+                            <ul class="plan-features">
+                                <li><i class="fas fa-check"></i> Community Access</li>
+                                <li><i class="fas fa-check"></i> Basic Guides</li>
+                                <li><i class="fas fa-times"></i> 1-on-1 Mentoring</li>
+                                <li><i class="fas fa-times"></i> Early Access</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="plan featured">
+                            <h4>Pro Trader</h4>
+                            <p class="plan-price">$50 <small>/month</small></p>
+                            <ul class="plan-features">
+                                <li><i class="fas fa-check"></i> Everything in Basic</li>
+                                <li><i class="fas fa-check"></i> Weekly 1-on-1 Calls</li>
+                                <li><i class="fas fa-check"></i> Early Signal Access</li>
+                                <li><i class="fas fa-check"></i> Portfolio Review</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact & Support -->
+                <div class="payment-card card">
+                    <div class="payment-header">
+                        <i class="fas fa-headset"></i>
+                        <h3>Support & Contact</h3>
+                    </div>
+                    <div class="support-options">
+                        <a href="https://t.me/deekingbeyond" target="_blank" class="support-btn telegram">
+                            <i class="fab fa-telegram"></i> DM on Telegram
+                        </a>
+                        
+                        <a href="mailto:support@aniverse.com" class="support-btn email">
+                            <i class="fas fa-envelope"></i> Email Support
+                        </a>
+                        
+                        <div class="support-note">
+                            <p><i class="fas fa-info-circle"></i> After payment, send:</p>
+                            <ul>
+                                <li>Transaction ID/Screenshot</li>
+                                <li>@Deekingbeyond</li>
+                                <li>Selected Plan</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Important Notice -->
+            <div class="notice-card card">
+                <h3><i class="fas fa-exclamation-triangle"></i> Important Notice</h3>
+                <div class="notice-content">
+                    <p>1. All payments are non-refundable</p>
+                    <p>2. Premium access activates within 24 hours of payment confirmation</p>
+                    <p>3. Keep your transaction proofs for verification</p>
+                    <p>4. This is financial advice - invest responsibly</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 AniVerse Community. All transactions are your responsibility.</p>
+    </footer>
+
+    <script>
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.value || element.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showAlert('Copied to clipboard!', 'success');
+            }).catch(err => {
+                console.error('Copy failed:', err);
+                showAlert('Failed to copy', 'error');
+            });
+        }
+        
+        function showAlert(message, type) {
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.textContent = message;
+            alert.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 5px;
+                color: white;
+                z-index: 10000;
+                animation: slideIn 0.3s;
+            `;
+            
+            if (type === 'success') {
+                alert.style.background = '#00ff7f';
+                alert.style.color = '#000';
+            } else {
+                alert.style.background = '#ff4081';
+            }
+            
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

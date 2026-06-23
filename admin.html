@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | AniVerse</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="logo">
+            <i class="fas fa-crown"></i>
+            <span>AniVerse Admin</span>
+        </div>
+        
+        <div class="user-menu">
+            <span>Admin Panel</span>
+            <a href="home.html" class="btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Site
+            </a>
+        </div>
+    </header>
+
+    <main class="admin-panel">
+        <div class="admin-grid">
+            <!-- Sidebar -->
+            <aside class="admin-sidebar">
+                <div class="admin-profile">
+                    <h3><i class="fas fa-user-shield"></i> Admin Account</h3>
+                    <p id="adminUsername">Loading...</p>
+                </div>
+                
+                <ul class="admin-nav">
+                    <li><a href="#" class="active" onclick="showSection('dashboard')">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a></li>
+                    <li><a href="#" onclick="showSection('updates')">
+                        <i class="fas fa-newspaper"></i> Manage Updates
+                    </a></li>
+                    <li><a href="#" onclick="showSection('ads')">
+                        <i class="fas fa-ad"></i> Manage Ads
+                    </a></li>
+                    <li><a href="#" onclick="showSection('quotes')">
+                        <i class="fas fa-quote-right"></i> Manage Quotes
+                    </a></li>
+                    <li><a href="#" onclick="showSection('users')">
+                        <i class="fas fa-users-cog"></i> User Management
+                    </a></li>
+                    <li><a href="#" onclick="showSection('settings')">
+                        <i class="fas fa-cog"></i> Settings
+                    </a></li>
+                </ul>
+                
+                <div class="admin-stats">
+                    <h4>Quick Stats</h4>
+                    <div class="stat-item">
+                        <span>Total Users:</span>
+                        <span id="statUsers">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Active Updates:</span>
+                        <span id="statUpdates">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Active Ads:</span>
+                        <span id="statAds">0</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="admin-content">
+                <!-- Dashboard Section -->
+                <section id="dashboardSection" class="admin-section active">
+                    <h2><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h2>
+                    <p class="admin-subtitle">Welcome to the admin control panel</p>
+                    
+                    <div class="dashboard-cards">
+                        <div class="admin-card">
+                            <h3><i class="fas fa-plus-circle"></i> Quick Actions</h3>
+                            <div class="quick-actions">
+                                <button onclick="showSection('updates')" class="action-btn">
+                                    <i class="fas fa-plus"></i> Add Update
+                                </button>
+                                <button onclick="showSection('ads')" class="action-btn">
+                                    <i class="fas fa-ad"></i> Create Ad
+                                </button>
+                                <button onclick="showSection('quotes')" class="action-btn">
+                                    <i class="fas fa-quote-left"></i> Add Quote
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="admin-card">
+                            <h3><i class="fas fa-chart-bar"></i> Recent Activity</h3>
+                            <div id="recentActivity">
+                                <p>Loading activity...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="admin-card">
+                            <h3><i class="fas fa-exclamation-triangle"></i> System Status</h3>
+                            <div class="status-list">
+                                <div class="status-item online">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Database: Connected</span>
+                                </div>
+                                <div class="status-item online">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Storage: Local</span>
+                                </div>
+                                <div class="status-item online">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Security: Active</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Manage Updates Section -->
+                <section id="updatesSection" class="admin-section">
+                    <h2><i class="fas fa-newspaper"></i> Manage Community Updates</h2>
+                    
+                    <div class="form-card">
+                        <h3>Add New Update</h3>
+                        <div class="form-group">
+                            <label for="adminTitle">Title</label>
+                            <input type="text" id="adminTitle" class="form-control" placeholder="Enter update title">
+                        </div>
+                        <div class="form-group">
+                            <label for="adminContent">Content</label>
+                            <textarea id="adminContent" class="form-control" placeholder="Enter update content..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="adminPin">
+                                <input type="checkbox" id="adminPin"> Pin this update
+                            </label>
+                        </div>
+                        <button onclick="saveAdminUpdates()" class="btn-primary">
+                            <i class="fas fa-save"></i> Publish Update
+                        </button>
+                    </div>
+                    
+                    <div class="existing-updates">
+                        <h3>Existing Updates</h3>
+                        <div id="updatesList">
+                            <p>Loading updates...</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Manage Ads Section -->
+                <section id="adsSection" class="admin-section">
+                    <h2><i class="fas fa-ad"></i> Manage Advertisements</h2>
+                    
+                    <div class="form-card">
+                        <h3>Create New Ad</h3>
+                        <div class="form-group">
+                            <label for="adTitle">Ad Title</label>
+                            <input type="text" id="adTitle" class="form-control" placeholder="Enter ad title">
+                        </div>
+                        <div class="form-group">
+                            <label for="adText">Ad Text</label>
+                            <textarea id="adText" class="form-control" placeholder="Enter ad text..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="adLink">Link URL</label>
+                            <input type="url" id="adLink" class="form-control" placeholder="https://example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="adButtonText">Button Text</label>
+                            <input type="text" id="adButtonText" class="form-control" placeholder="Learn More">
+                        </div>
+                        <div class="form-group">
+                            <label for="adActive">
+                                <input type="checkbox" id="adActive" checked> Active
+                            </label>
+                            <label for="adManual" style="margin-left: 20px;">
+                                <input type="checkbox" id="adManual"> Show on manual trigger
+                            </label>
+                        </div>
+                        <button onclick="createNewAd()" class="btn-primary">
+                            <i class="fas fa-plus"></i> Create Ad
+                        </button>
+                    </div>
+                    
+                    <div class="existing-ads">
+                        <h3>Active Ads</h3>
+                        <div id="adsContainer">
+                            <p>Loading ads...</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Manage Quotes Section -->
+                <section id="quotesSection" class="admin-section">
+                    <h2><i class="fas fa-quote-right"></i> Manage Anime Quotes</h2>
+                    
+                    <div class="form-card">
+                        <h3>Add New Quote</h3>
+                        <div class="form-group">
+                            <label for="quoteText">Quote</label>
+                            <textarea id="quoteText" class="form-control" placeholder="Enter the quote..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="quoteAuthor">Author</label>
+                            <input type="text" id="quoteAuthor" class="form-control" placeholder="Enter author name">
+                        </div>
+                        <div class="form-group">
+                            <label for="quoteAnime">Anime/Series</label>
+                            <input type="text" id="quoteAnime" class="form-control" placeholder="Enter anime name">
+                        </div>
+                        <button onclick="addNewQuote()" class="btn-primary">
+                            <i class="fas fa-plus"></i> Add Quote
+                        </button>
+                    </div>
+                    
+                    <div class="existing-quotes">
+                        <h3>Existing Quotes</h3>
+                        <div id="quotesList">
+                            <p>Loading quotes...</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Admin JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is admin
+            const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            if (!user || (user.role !== 'admin' && user.username !== 'admin')) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Set admin username
+            document.getElementById('adminUsername').textContent = user.username;
+            
+            // Load stats
+            loadAdminStats();
+            
+            // Load recent activity
+            loadRecentActivity();
+            
+            // Load existing content
+            loadExistingUpdates();
+            loadExistingAds();
+            loadExistingQuotes();
+        });
+        
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.admin-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(`${section}Section`).classList.add('active');
+            
+            // Update active nav
+            document.querySelectorAll('.admin-nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+        
+        async function loadAdminStats() {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            document.getElementById('statUsers').textContent = users.length;
+            
+            try {
+                const updatesRes = await fetch('./assets/json/updates.json');
+                const updates = await updatesRes.json();
+                document.getElementById('statUpdates').textContent = updates.length;
+                
+                const adsRes = await fetch('./assets/json/ads.json');
+                const ads = await adsRes.json();
+                const activeAds = ads.filter(ad => ad.active).length;
+                document.getElementById('statAds').textContent = activeAds;
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+        
+        async function loadRecentActivity() {
+            try {
+                const res = await fetch('./assets/json/updates.json');
+                const updates = await res.json();
+                
+                const activityList = document.getElementById('recentActivity');
+                const recent = updates.slice(0, 3);
+                
+                activityList.innerHTML = recent.map(update => `
+                    <div class="activity-item">
+                        <strong>${update.title}</strong>
+                        <small>${formatDate(update.date)}</small>
+                    </div>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Error loading activity:', error);
+            }
+        }
+        
+        async function loadExistingUpdates() {
+            try {
+                const res = await fetch('./assets/json/updates.json');
+                const updates = await res.json();
+                
+                const list = document.getElementById('updatesList');
+                list.innerHTML = updates.map(update => `
+                    <div class="update-item card">
+                        <div class="update-header">
+                            <h4>${update.title} ${update.pinned ? '📌' : ''}</h4>
+                            <div class="update-actions">
+                                <button onclick="editUpdate(${update.id})" class="btn-small">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button onclick="deleteUpdate(${update.id})" class="btn-small btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p>${update.content.substring(0, 100)}...</p>
+                        <small>By ${update.author} on ${formatDate(update.date)}</small>
+                    </div>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Error loading updates:', error);
+            }
+        }
+        
+        async function loadExistingAds() {
+            try {
+                const res = await fetch('./assets/json/ads.json');
+                const ads = await res.json();
+                
+                const container = document.getElementById('adsContainer');
+                container.innerHTML = ads.map(ad => `
+                    <div class="ad-item card ${ad.active ? 'active' : 'inactive'}">
+                        <div class="ad-header">
+                            <h4>${ad.title} ${ad.active ? '✅' : '❌'}</h4>
+                            <div class="ad-actions">
+                                <button onclick="toggleAd(${ad.id})" class="btn-small">
+                                    ${ad.active ? 'Deactivate' : 'Activate'}
+                                </button>
+                                <button onclick="deleteAd(${ad.id})" class="btn-small btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p>${ad.text}</p>
+                        <small>Link: ${ad.link}</small>
+                    </div>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Error loading ads:', error);
+            }
+        }
+        
+        async function loadExistingQuotes() {
+            try {
+                const res = await fetch('./assets/json/quotes.json');
+                const quotes = await res.json();
+                
+                const list = document.getElementById('quotesList');
+                list.innerHTML = quotes.map((quote, index) => `
+                    <div class="quote-item card">
+                        <div class="quote-header">
+                            <h4>Quote #${index + 1}</h4>
+                            <div class="quote-actions">
+                                <button onclick="deleteQuote(${index})" class="btn-small btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p>"${quote.quote}"</p>
+                        <small>— ${quote.author} (${quote.anime})</small>
+                    </div>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Error loading quotes:', error);
+            }
+        }
+        
+        async function createNewAd() {
+            const title = document.getElementById('adTitle').value.trim();
+            const text = document.getElementById('adText').value.trim();
+            const link = document.getElementById('adLink').value.trim();
+            const buttonText = document.getElementById('adButtonText').value.trim();
+            const active = document.getElementById('adActive').checked;
+            const manual = document.getElementById('adManual').checked;
+            
+            if (!title || !text || !link) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            try {
+                const res = await fetch('./assets/json/ads.json');
+                const ads = await res.json();
+                
+                const newAd = {
+                    id: Date.now(),
+                    title,
+                    text,
+                    link,
+                    buttonText: buttonText || 'Learn More',
+                    active,
+                    manual,
+                    duration: 10
+                };
+                
+                ads.push(newAd);
+                
+                // In a real app, you would save to server
+                // For demo, just update the display
+                alert('Ad created successfully (demo mode)');
+                loadExistingAds();
+                
+                // Clear form
+                document.getElementById('adTitle').value = '';
+                document.getElementById('adText').value = '';
+                document.getElementById('adLink').value = '';
+                document.getElementById('adButtonText').value = '';
+                
+            } catch (error) {
+    

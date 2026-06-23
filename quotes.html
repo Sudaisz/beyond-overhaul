@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Quotes | AniVerse</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="logo">
+            <i class="fas fa-quote-right"></i>
+            <span>AniVerse Quotes</span>
+        </div>
+        
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="community.html"><i class="fas fa-users"></i> Community</a></li>
+                <li><a href="quotes.html" class="active"><i class="fas fa-quote-right"></i> Quotes</a></li>
+                <li><a href="payment.html"><i class="fas fa-wallet"></i> Payment</a></li>
+                <li><a href="#" onclick="showAd()"><i class="fas fa-gift"></i> Offers</a></li>
+            </ul>
+        </nav>
+        
+        <div class="user-menu">
+            <button onclick="window.history.back()" class="btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="quotes-header">
+                <h1><i class="fas fa-quote-left"></i> Anime Quotes</h1>
+                <p class="subtitle">Daily inspiration from your favorite anime</p>
+                
+                <div class="quote-controls">
+                    <button onclick="showQuote()" class="btn-primary">
+                        <i class="fas fa-random"></i> New Quote
+                    </button>
+                    <button onclick="showAd()" class="btn-secondary">
+                        <i class="fas fa-gift"></i> Special Offer
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Quote Display -->
+            <div id="quoteDisplay" class="quote-display">
+                <div class="loading-quote">
+                    <i class="fas fa-spinner fa-spin"></i> Loading quotes...
+                </div>
+            </div>
+            
+            <!-- Quote Info -->
+            <div class="quote-info card">
+                <h3><i class="fas fa-info-circle"></i> About These Quotes</h3>
+                <p>This collection features inspirational quotes from various anime series. Each quote is meant to motivate and inspire.</p>
+                <p>Click "New Quote" for a random quote, or wait for it to auto-refresh.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 AniVerse Community</p>
+            <p>Quotes collected from various anime series</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize quotes on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadQuotes();
+        });
+    </script>
+<footer style="text-align:center;padding:20px">Owner: <a href="https://t.me/deekingbeyond">@deekingbeyond</a></footer></body>
+</html>

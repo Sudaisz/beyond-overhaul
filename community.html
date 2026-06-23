@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta property="og:title" content="Beyondthy Community">
+<meta property="og:description" content="Community, payments, updates and discussions.">
+<meta property="og:image" content="social-preview.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community | AniVerse</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="logo">
+            <i class="fas fa-users"></i>
+            <span>AniVerse Community</span>
+        </div>
+        
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="home.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="community.html" class="active"><i class="fas fa-comments"></i> Community</a></li>
+                <li><a href="quotes.html"><i class="fas fa-quote-right"></i> Anime Quotes</a></li>
+                <li><a href="payment.html"><i class="fas fa-wallet"></i> Payment</a></li>
+                <li><a href="#" onclick="showAd(true)"><i class="fas fa-gift"></i> Offers</a></li>
+            </ul>
+        </nav>
+        
+        <div class="user-menu">
+            <span id="userGreeting">Welcome, <strong id="usernameDisplay"></strong></span>
+            <button onclick="logoutUser()" class="btn-secondary">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="community-header">
+                <h1><i class="fas fa-users"></i> Community Feed</h1>
+                <p class="subtitle">Share, discuss, and grow with fellow anime enthusiasts and traders</p>
+                
+                <div class="community-stats">
+                    <div class="stat-badge">
+                        <i class="fas fa-newspaper"></i>
+                        <span id="totalPosts">0</span> Posts
+                    </div>
+                    <div class="stat-badge">
+                        <i class="fas fa-user-friends"></i>
+                        <span id="totalMembers">0</span> Members
+                    </div>
+                    <div class="stat-badge">
+                        <i class="fas fa-fire"></i>
+                        <span id="activeNow">5</span> Online Now
+                    </div>
+                </div>
+            </div>
+
+            <div class="community-layout">
+                <!-- Left Sidebar - Categories & Filters -->
+                <aside class="community-sidebar">
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-filter"></i> Categories</h3>
+                        <ul class="category-list">
+                            <li class="active" onclick="filterPosts('all')">
+                                <i class="fas fa-globe"></i> All Posts
+                            </li>
+                            <li onclick="filterPosts('announcements')">
+                                <i class="fas fa-bullhorn"></i> Announcements
+                            </li>
+                            <li onclick="filterPosts('trading')">
+                                <i class="fas fa-chart-line"></i> Trading Tips
+                            </li>
+                            <li onclick="filterPosts('anime')">
+                                <i class="fas fa-tv"></i> Anime Discussions
+                            </li>
+                            <li onclick="filterPosts('crypto')">
+                                <i class="fas fa-coins"></i> Crypto Updates
+                            </li>
+                            <li onclick="filterPosts('questions')">
+                                <i class="fas fa-question-circle"></i> Q&A
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-trophy"></i> Top Contributors</h3>
+                        <div class="contributors-list">
+                            <div class="contributor">
+                                <span class="contributor-name">admin</span>
+                                <span class="contributor-badge">Admin</span>
+                            </div>
+                            <div class="contributor">
+                                <span class="contributor-name">moderator</span>
+                                <span class="contributor-badge">Mod</span>
+                            </div>
+                            <div class="contributor">
+                                <span class="contributor-name">AnimeLover23</span>
+                                <span class="contributor-posts">42 posts</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-info-circle"></i> Community Rules</h3>
+                        <div class="rules-list">
+                            <p>✅ Be respectful to everyone</p>
+                            <p>✅ No spam or self-promotion</p>
+                            <p>✅ Keep discussions relevant</p>
+                            <p>✅ No financial advice begging</p>
+                            <p>✅ Have fun and learn!</p>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Content - Posts -->
+                <div class="community-main">
+                    <!-- Create Post (for logged in users) -->
+                    <div class="create-post-card card">
+                        <div class="post-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="post-editor">
+                            <textarea id="newPostContent" placeholder="Share your thoughts with the community..."></textarea>
+                            <div class="post-actions">
+                                <div class="post-categories">
+                                    <select id="postCategory" class="category-select">
+                                        <option value="general">General</option>
+                                        <option value="announcements">Announcements</option>
+                                        <option value="trading">Trading Tips</option>
+                                        <option value="anime">Anime Discussion</option>
+                                        <option value="crypto">Crypto News</option>
+                                        <option value="questions">Question</option>
+                                    </select>
+                                </div>
+                                <button onclick="createPost()" class="btn-primary">
+                                    <i class="fas fa-paper-plane"></i> Post
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pinned Posts -->
+                    <div id="pinnedPostsSection">
+                        <h3 class="section-title">
+                            <i class="fas fa-thumbtack"></i> Pinned Announcements
+                        </h3>
+                        <div id="pinnedPosts">
+                            <!-- Pinned posts will load here -->
+                        </div>
+                    </div>
+
+                    <!-- All Posts -->
+                    <div class="posts-section">
+                        <div class="posts-header">
+                            <h3 class="section-title">
+                                <i class="fas fa-stream"></i> Recent Posts
+                            </h3>
+                            <div class="sort-options">
+                                <select id="sortPosts" onchange="sortPosts()" class="sort-select">
+                                    <option value="newest">Newest First</option>
+                                    <option value="oldest">Oldest First</option>
+                                    <option value="popular">Most Popular</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div id="communityFeed">
+                            <!-- Posts will load here -->
+                            <div class="loading-posts">
+                                <i class="fas fa-spinner fa-spin"></i> Loading community posts...
+                            </div>
+                        </div>
+
+                        <!-- Load More Button -->
+                        <div class="load-more-container">
+                            <button id="loadMoreBtn" onclick="loadMorePosts()" class="btn-secondary">
+                                <i class="fas fa-plus"></i> Load More Posts
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar - Live Updates & Info -->
+                <aside class="community-sidebar right-sidebar">
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-bolt"></i> Live Updates</h3>
+                        <div class="live-updates">
+                            <div class="update-item">
+                                <i class="fas fa-user-plus"></i>
+                                <span>New member joined: CryptoKing</span>
+                            </div>
+                            <div class="update-item">
+                                <i class="fas fa-comment"></i>
+                                <span>AnimeLover posted about One Piece</span>
+                            </div>
+                            <div class="update-item">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Bitcoin discussion trending</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-calendar-alt"></i> Upcoming Events</h3>
+                        <div class="events-list">
+                            <div class="event">
+                                <div class="event-date">Dec 15</div>
+                                <div class="event-details">
+                                    <strong>AMA Session</strong>
+                                    <small>Live Q&A with admin</small>
+                                </div>
+                            </div>
+                            <div class="event">
+                                <div class="event-date">Dec 20</div>
+                                <div class="event-details">
+                                    <strong>Trading Workshop</strong>
+                                    <small>Advanced strategies</small>
+                                </div>
+                            </div>
+                            <div class="event">
+                                <div class="event-date">Jan 1</div>
+                                <div class="event-details">
+                                    <strong>New Year Giveaway</strong>
+                                    <small>Prize pool: $500</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-hashtag"></i> Trending Topics</h3>
+                        <div class="trending-tags">
+                            <span class="tag" onclick="searchTag('#Bitcoin')">#Bitcoin</span>
+                            <span class="tag" onclick="searchTag('#Anime')">#Anime</span>
+                            <span class="tag" onclick="searchTag('#Trading')">#Trading</span>
+                            <span class="tag" onclick="searchTag('#Altcoins')">#Altcoins</span>
+                            <span class="tag" onclick="searchTag('#Manga')">#Manga</span>
+                            <span class="tag" onclick="searchTag('#Crypto')">#Crypto</span>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3><i class="fas fa-users"></i> Join Our Groups</h3>
+                        <div class="social-links">
+                            <a href="https://t.me/beyondtechs" target="_blank" class="social-link telegram">
+                                <i class="fab fa-telegram"></i> Telegram Channel
+                            </a>
+                            <a href="https://t.me/deekingbeyond" target="_blank" class="social-link telegram">
+                                <i class="fas fa-comments"></i> Discussion Group
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Post Details -->
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalContent">
+                <!-- Post details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>&copy; 2025 AniVerse Community. Connect, Learn, Grow.</p>
+            <div class="footer-links">
+                <a href="#" onclick="showAd(true)">Special Offers</a> |
+                <a href="payment.html">Support Us</a> |
+                <a href="https://t.me/deekingbeyond" target="_blank">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Community JavaScript
+        let allPosts = [];
+        let postsPerPage = 5;
+        let currentPage = 1;
+        let currentFilter = 'all';
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Check if user is logged in
+            const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            if (!user.username) {
+                // Redirect to login if not logged in
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Set username display
+            const usernameDisplay = document.getElementById('usernameDisplay');
+            const userGreeting = document.getElementById('userGreeting');
+            
+            if (usernameDisplay) {
+                usernameDisplay.textContent = user.username;
+            }
+            
+            if (userGreeting) {
+                userGreeting.innerHTML = `Welcome, <strong>${user.username || 'Guest'}</strong>`;
+            }
+
+            // Load community data
+            await loadCommunityData();
+            updateCommunityStats();
+            loadPinnedPosts();
+
+            // Check if user is admin/moderator
+            if (user.role === 'admin' || user.role === 'moderator' || user.username === 'admin') {
+                addModeratorFeatures();
+            }
+        });
+
+        async function loadCommunityData() {
+            try {
+                allPosts = await window.loadCommunityData();
+                displayAllPosts();
+            } catch (error) {
+                console.error('Error loading community data:', error);
+                document.getElementById('communityFeed').innerHTML = 
+                    '<div class="error-message">Failed to load community posts. Please try again later.</div>';
+            }
+        }
+
+        function displayAllPosts() {
+            const container = document.getElementById('communityFeed');
+            if (!container) return;
+            
+            // Filter posts based on current filter
+            let filteredPosts = allPosts;
+            if (currentFilter !== 'all') {
+                filteredPosts = allPosts.filter(post => post.category === currentFilter);
+            }
+            
+            // Sort posts based on selected option
+            const sortOption = document.getElementById('sortPosts')?.value || 'newest';
+            filteredPosts.sort((a, b) => {
+                if (sortOption === 'newest') {
+                    return new Date(b.timestamp) - new Date(a.timestamp);
+                } else if (sortOption === 'oldest') {
+                    return new Date(a.timestamp) - new Date(b.timestamp);
+                } else if (sortOption === 'popular') {
+                    return (b.likes + (b.comments?.length || 0)) - (a.likes + (a.comments?.length || 0));
+                }
+                return 0;
+            });
+            
+            const startIndex = (currentPage - 1) * postsPerPage;
+            const endIndex = startIndex + postsPerPage;
+            const postsToShow = filteredPosts.slice(startIndex, endIndex);
+            
+            if (postsToShow.length === 0) {
+                if (currentPage === 1) {
+                    container.innerHTML = '<div class="no-posts">No posts found. Be the first to post!</div>';
+                } else {
+                    container.innerHTML += '<div class="no-more-posts">No more posts to load.</div>';
+                }
+                document.getElementById('loadMoreBtn').style.display = 'none';
+                return;
+            }
+            
+            let postsHTML = '';
+            
+            postsToShow.forEach(post => {
+                const timeAgo = window.getTimeAgo ? window.getTimeAgo(post.timestamp) : 'Recently';
+                const isPinned = post.pinned ? 'pinned' : '';
+                
+                postsHTML += `
+                    <div class="community-post card ${isPinned}" data-id="${post.id}" data-category="${post.category}">
+                        <div class="post-header">
+                            <div class="post-author">
+                                <div class="author-avatar">${post.avatar || '😊'}</div>
+                                <div class="author-info">
+                                    <strong>${post.author || 'Unknown'}</strong>
+                                    <small>${timeAgo} • ${post.category || 'general'}</small>
+                                </div>
+                            </div>
+                            ${post.pinned ? '<span class="pin-badge"><i class="fas fa-thumbtack"></i> Pinned</span>' : ''}
+                        </div>
+                        
+                        <div class="post-content">
+                            <h4 onclick="viewPost(${post.id})" style="cursor: pointer;">${post.title || 'Untitled'}</h4>
+                            <p>${window.truncateText ? window.truncateText(post.content || '', 200) : (post.content?.substring(0, 200) || '')}</p>
+                            ${post.content && post.content.length > 200 ? `<button onclick="viewPost(${post.id})" class="read-more">Read more</button>` : ''}
+                        </div>
+                        
+                        <div class="post-footer">
+                            <div class="post-stats">
+                                <button class="stat-btn" onclick="likePost(${post.id})">
+                                    <i class="far fa-heart"></i> ${post.likes || 0}
+                                </button>
+                                <button class="stat-btn" onclick="viewPost(${post.id})">
+                                    <i class="far fa-comment"></i> ${post.comments ? post.comments.length : 0}
+                                </button>
+                                <button class="stat-btn" onclick="sharePost(${post.id})">
+                                    <i class="fas fa-share"></i> Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            if
